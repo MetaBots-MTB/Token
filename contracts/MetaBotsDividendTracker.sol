@@ -34,7 +34,7 @@ contract MetaBotsDividendTracker is Ownable, DividendPayingToken, ERC20TokenReco
     }
 
     function recoverERC20(address tokenAddress, uint256 tokenAmount) public override onlyOwnerOrParentToken {
-        require(tokenAddress != dividendToken, 'MetaBotsDividendTracker: Cannot retrieve USDT');
+        require(tokenAddress != dividendToken, 'CANNOT_RETRIEVE_DIV_TOKEN');
         super.recoverERC20(tokenAddress, tokenAmount);
     }
 
@@ -43,7 +43,7 @@ contract MetaBotsDividendTracker is Ownable, DividendPayingToken, ERC20TokenReco
         address,
         uint256
     ) internal pure override {
-        require(false, 'MetaBotsDividendTracker: No transfers allowed');
+        require(false, 'NO_TRANSFERS_ALLOWED');
     }
 
     function withdrawDividend() public pure override(DividendPayingToken, IDividendPayingTokenInterface) {
@@ -54,7 +54,7 @@ contract MetaBotsDividendTracker is Ownable, DividendPayingToken, ERC20TokenReco
     }
 
     function excludeFromDividends(address account) external override onlyOwnerOrParentToken {
-        require(!excludedFromDividends[account], 'MetaBotsDividendTracker: Account already excluded');
+        require(!excludedFromDividends[account], 'ACCOUNT_ALREADY_EXCLUDED');
         excludedFromDividends[account] = true;
 
         _setBalance(account, 0);
@@ -64,7 +64,7 @@ contract MetaBotsDividendTracker is Ownable, DividendPayingToken, ERC20TokenReco
     }
 
     function includeInDividends(address account) external override onlyOwnerOrParentToken {
-        require(excludedFromDividends[account], 'MetaBotsDividendTracker: Account not excluded');
+        require(excludedFromDividends[account], 'ACCOUNT_NOT_EXCLUDED');
 
         excludedFromDividends[account] = false;
         _setBalance(account, 0);
@@ -73,11 +73,8 @@ contract MetaBotsDividendTracker is Ownable, DividendPayingToken, ERC20TokenReco
     }
 
     function updateClaimWait(uint256 newClaimWait) external override onlyOwnerOrParentToken {
-        require(
-            newClaimWait >= 3600 && newClaimWait <= 86400,
-            'MetaBotsDividendTracker: claimWait must be updated to between 1 and 24 hours'
-        );
-        require(newClaimWait != claimWait, 'MetaBotsDividendTracker: Cannot update claimWait to same value');
+        require(newClaimWait >= 3600 && newClaimWait <= 86400, 'VALUE_NOT_BETWEEN_3600_86400');
+        require(newClaimWait != claimWait, 'VALUE_ALREADY_SET');
         emit ClaimWaitUpdated(newClaimWait, claimWait);
         claimWait = newClaimWait;
     }

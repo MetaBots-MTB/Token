@@ -147,7 +147,7 @@ contract MetaBots is
     }
 
     function initPSIDividendTracker(IDividendTracker _dividendTracker, address router_) external onlyOwner {
-        require(address(dividendTracker) == address(0), "MetaBots: Dividend tracker already initialized");
+        require(address(dividendTracker) == address(0), "ALREADY_INITIALIZED");
         dividendTracker = _dividendTracker;
         dividendTracker.excludeFromDividends(address(dividendTracker));
         
@@ -161,6 +161,16 @@ contract MetaBots is
 
         excludeFromFeesAndDividends(address(this));
         excludeFromFeesAndDividends(_msgSender());
+    }
+
+    function updatePSIDividendTracker(IDividendTracker _dividendTracker) external onlyOwner {
+        dividendTracker = _dividendTracker;
+        dividendTracker.excludeFromDividends(address(dividendTracker));
+        dividendTracker.excludeFromDividends(dexPair);
+        dividendTracker.excludeFromDividends(address(dexRouter));
+        dividendTracker.excludeFromDividends(address(0x000000000000000000000000000000000000dEaD));
+        dividendTracker.excludeFromDividends(address(this));
+        dividendTracker.excludeFromDividends(_msgSender());
     }
 
     /**
@@ -180,7 +190,7 @@ contract MetaBots is
     ) public onlyOwner {
         require(
             (_buybackFee + _developmentFee + _marketingFee + _liquidityFee + _psiFee) <= 2000,
-            'Total fee must be lower than or equal to 20%'
+            'FEE_HIGHER_THAN_20%'
         );
         buybackFee = _buybackFee;
         developmentFee = _developmentFee;
@@ -190,27 +200,27 @@ contract MetaBots is
     }
     
     function setBuybackAddress(address payable buybackAddress_) public onlyOwner {
-        require(buybackAddress_ != address(0), 'Cannot be a zero address');
+        require(buybackAddress_ != address(0), 'ZERO_ADDRESS');
         buybackAddress = buybackAddress_;
     }
     
     function changeMarketingAddress(address payable marketingAddress_) public onlyOwner {
-        require(marketingAddress_ != address(0), 'Cannot be a zero address');
+        require(marketingAddress_ != address(0), 'ZERO_ADDRESS');
         marketingAddress = marketingAddress_;
     }
 
     function changeDevelopmentAddress(address payable developmentAddress_) public onlyOwner {
-        require(developmentAddress_ != address(0), 'Cannot be a zero address');
+        require(developmentAddress_ != address(0), 'ZERO_ADDRESS');
         developmentAddress = developmentAddress_;
     }
 
     function changePSIAddress(address PSIAddress_) public onlyOwner {
-        require(PSIAddress_ != address(0), 'Cannot be a zero address');
+        require(PSIAddress_ != address(0), 'ZERO_ADDRESS');
         psiTokenAddress = PSIAddress_;
     }
 
     function changeLiquidityAddress(address payable liquidityAddress_) public onlyOwner {
-        require(liquidityAddress_ != address(0), 'Cannot be a zero address');
+        require(liquidityAddress_ != address(0), 'ZERO_ADDRESS');
         liquidityAddress = liquidityAddress_;
     }
     
@@ -242,28 +252,18 @@ contract MetaBots is
         }
     }
     function setAutomatedMarketMakerPair(address pair, bool value) external onlyOwner {
-        require(
-            value || pair != dexPair,
-            'MetaBots: The default pair cannot be removed from automatedMarketMakerPairs'
-        );
+        require(value || pair != dexPair, 'CANNOT_REMOVE_DEFAULT_PAIR');
         _setAutomatedMarketMakerPair(pair, value);
     }
     function _setAutomatedMarketMakerPair(address pair, bool value) private {
-        require(
-            automatedMarketMakerPairs[pair] != value,
-            'MetaBots: Automated market maker pair is already set to that value'
-        );
+        require(automatedMarketMakerPairs[pair] != value, 'VALUE_ALREADY_SET');
 
         automatedMarketMakerPairs[pair] = value;
         if (value && address(dividendTracker) != address(0)) dividendTracker.excludeFromDividends(pair);
         emit SetAutomatedMarketMakerPair(pair, value);
     }
     function updateGasForProcessing(uint256 newValue) external onlyOwner {
-        require(
-            newValue >= 200000 && newValue <= 500000,
-            'MetaBots: gasForProcessing must be between 200,000 and 500,000'
-        );
-        require(newValue != gasForProcessing, 'MetaBots: Cannot update gasForProcessing to same value');
+        require(newValue >= 200000 && newValue <= 500000, 'VALUE_NOT_BETWEEN_200000_500000');
         gasForProcessing = newValue;
     }
 
@@ -277,20 +277,20 @@ contract MetaBots is
     }
     
     function changeSellLimit(uint256 _sellLimit) public onlyOwner {
-        require(_sellLimit >= 100 && _sellLimit <= 10000, "Wrong sell limit");
+        require(_sellLimit >= 100 && _sellLimit <= 10000, "VALUE_NOT_BETWEEN_100_10000");
         sellLimit = _sellLimit;
     }
     function toggleSellAmountLimited() external onlyOwner() {
         sellAmountLimited = !sellAmountLimited;
     }
     function toggleTradingPaused() external onlyOwner {
-        require(address(dividendTracker) != address(0), "MetaBots: Dividend tracker not yet initialized");
+        require(address(dividendTracker) != address(0), "DIV_TRACKER_NOT_INITIALIZED");
         tradingPaused = !tradingPaused;
     }
 
     function multiTransfer(address[] memory receivers, uint256[] memory amounts) external {
-        require(receivers.length != 0, 'Cannot Proccess Null Transaction');
-        require(receivers.length == amounts.length, 'Address and Amount array length must be same');
+        require(receivers.length != 0, 'NO_RECEIVERS');
+        require(receivers.length == amounts.length, 'ARRAY_LENGTH_NOT_EQUAL');
         for (uint256 i = 0; i < receivers.length; i++) {
             transfer(receivers[i], amounts[i]);
         }
@@ -305,7 +305,7 @@ contract MetaBots is
         if(((automatedMarketMakerPairs[recipient] && balanceOf(recipient) != 0) ||
             automatedMarketMakerPairs[sender]) && 
             sender != liquidityAddress) {
-            require(!tradingPaused, "Trading Paused");
+            require(!tradingPaused, "TRADING_PAUSED");
         }
         checkSellLimit(sender, recipient, amount);
 
@@ -336,7 +336,7 @@ contract MetaBots is
         } else {
             lastSells[sender] = LastSell(block.timestamp, amount);
         }
-        require(amount <= _limit, 'Cannot sell more than sellLimit');
+        require(amount <= _limit, 'SELL_LIMIT_REACHED');
     }
 
     function _transferExcluded(address sender, address recipient, uint256 amount) private {

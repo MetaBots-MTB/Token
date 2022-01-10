@@ -58,7 +58,7 @@ describe('MetaBots', () => {
   })
 
   it('Not possible to initializeDividendTracker again', async () => {
-    await expect(metaBots.initPSIDividendTracker(dividendTracker.address, router.address)).to.be.revertedWith("MetaBots: Dividend tracker already initialized")
+    await expect(metaBots.initPSIDividendTracker(dividendTracker.address, router.address)).to.be.revertedWith("ALREADY_INITIALIZED")
   })
 
   describe('Transfers', () => {
@@ -70,7 +70,7 @@ describe('MetaBots', () => {
     it('Succeed for adding liquidity by owner, fail for trades', async () => {
       await addTokenLiquidity()
       await expect(router.connect(user1).swapETHForExactTokens(expandTo18Decimals(1), buyPath, user1.address, constants.MaxUint256, { value: expandTo18Decimals(1) }))
-        .to.be.revertedWith("Pancake: TRANSFER_FAILED: Trading Paused")
+        .to.be.revertedWith("Pancake: TRANSFER_FAILED: TRADING_PAUSED")
     })
   })
 
@@ -95,12 +95,12 @@ describe('MetaBots', () => {
       await metaBots.transfer(user1.address, limit.mul(3))
       await metaBots.connect(user1).approve(router.address, limit.mul(3));
       await expect(router.connect(user1).swapExactTokensForETHSupportingFeeOnTransferTokens(limit.add(1), 0, sellPath, user1.address, constants.MaxUint256))
-        .to.be.revertedWith("TransferHelper: TRANSFER_FROM_FAILED: Cannot sell more than sellLimit")
+        .to.be.revertedWith("TransferHelper: TRANSFER_FROM_FAILED: SELL_LIMIT_REACHED")
 
       await router.connect(user1).swapExactTokensForETHSupportingFeeOnTransferTokens(limit.div(2), 0, sellPath, user1.address, constants.MaxUint256)
       await router.connect(user1).swapExactTokensForETHSupportingFeeOnTransferTokens(limit.div(2), 0, sellPath, user1.address, constants.MaxUint256)
       await expect(router.connect(user1).swapExactTokensForETHSupportingFeeOnTransferTokens(expandTo18Decimals(500000), 0, sellPath, user1.address, constants.MaxUint256))
-        .to.be.revertedWith("TransferHelper: TRANSFER_FROM_FAILED: Cannot sell more than sellLimit")
+        .to.be.revertedWith("TransferHelper: TRANSFER_FROM_FAILED: SELL_LIMIT_REACHED")
 
       await metaBots.toggleSellAmountLimited()
       await router.connect(user1).swapExactTokensForETHSupportingFeeOnTransferTokens(expandTo18Decimals(500000), 0, sellPath, user1.address, constants.MaxUint256)

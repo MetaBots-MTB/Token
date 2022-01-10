@@ -462,11 +462,6 @@ contract PancakeFactory is IPancakeFactory {
         feeToSetter = _feeToSetter;
     }
 
-    function creationCode() public pure returns (bytes32) {
-        return keccak256(abi.encodePacked(type(PancakePair).creationCode));
-    }
-
-
     function allPairsLength() external override view returns (uint) {
         return allPairs.length;
     }

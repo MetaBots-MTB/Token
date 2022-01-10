@@ -1467,6 +1467,19 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "contract IDividendTracker",
+        "name": "_dividendTracker",
+        "type": "address"
+      }
+    ],
+    "name": "updatePSIDividendTracker",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "stateMutability": "payable",
     "type": "receive"
   }

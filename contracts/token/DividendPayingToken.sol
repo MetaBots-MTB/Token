@@ -47,7 +47,7 @@ abstract contract DividendPayingToken is
     }
 
     function distributeDividends(uint256 amount) public virtual override onlyOwnerOrParentToken {
-        require(totalSupply() > 0, 'DividendPayingToken: Total Supply must be > 0');
+        require(totalSupply() > 0, 'TOTAL_SUPPLY_IS_0');
 
         if (amount > 0) {
             magnifiedDividendPerShare = magnifiedDividendPerShare + ((amount * magnitude) / totalSupply());

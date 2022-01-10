@@ -112,19 +112,6 @@
   },
   {
     "inputs": [],
-    "name": "creationCode",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "feeTo",
     "outputs": [
       {
