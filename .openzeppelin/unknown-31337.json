@@ -7,7 +7,7 @@
       "hash": "0x232d1492ff03fd4b83abe03f3543834d9df4d7899c4155c21e3f17d55320c810",
       "type": 2,
       "accessList": [],
-      "blockHash": "0xce02418fd02052955305a67f7da4410eb3d6c76220be6f2f637036dd80c0b9ac",
+      "blockHash": "0xc7987ce29564a7911dd5575fe606472391ce57eef22f255f4254750c09cdb62b",
       "blockNumber": 8,
       "transactionIndex": 0,
       "confirmations": 1,
@@ -44,8 +44,23 @@
   },
   "proxies": [
     {
+      "address": "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f",
+      "txHash": "0x836cfadea37ea1ac308dd25004f4695727c86fc50808e12b1ab1cb55b4983acd",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x09635F643e140090A9A8Dcd712eD6285858ceBef",
+      "txHash": "0xbfc0a3d5170b1fb6a1d4fe651833301cf6b9f0a3b08d54e8f15e4f858e5fc857",
+      "kind": "transparent"
+    },
+    {
       "address": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
       "txHash": "0x39ef6cbbdeafd770674d37bfa57a35e61856a33e71b57e4b3c869484fd2ce455",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
+      "txHash": "0x97adffeeb22ab7b48f86cff95c94c9aec03b8889ddfb95ea8875e768f8ec1bb5",
       "kind": "transparent"
     }
   ],
@@ -148,7 +163,7 @@
           {
             "contract": "ERC2612Upgradeable",
             "label": "_nonces",
-            "type": "t_mapping(t_address,t_struct(Counter)1366_storage)",
+            "type": "t_mapping(t_address,t_struct(Counter)1424_storage)",
             "src": "contracts\\token\\ERC2612\\ERC2612Upgradeable.sol:19"
           },
           {
@@ -166,7 +181,7 @@
           {
             "contract": "MetaBots",
             "label": "dividendTracker",
-            "type": "t_contract(IDividendTracker)7392",
+            "type": "t_contract(IDividendTracker)8305",
             "src": "contracts\\MetaBots.sol:44"
           },
           {
@@ -250,7 +265,7 @@
           {
             "contract": "MetaBots",
             "label": "lastSells",
-            "type": "t_mapping(t_address,t_struct(LastSell)3905_storage)",
+            "type": "t_mapping(t_address,t_struct(LastSell)3963_storage)",
             "src": "contracts\\MetaBots.sol:68"
           },
           {
@@ -274,7 +289,7 @@
           {
             "contract": "MetaBots",
             "label": "dexRouter",
-            "type": "t_contract(IDEXRouter)7211",
+            "type": "t_contract(IDEXRouter)8124",
             "src": "contracts\\MetaBots.sol:73"
           },
           {
@@ -303,7 +318,7 @@
           }
         ],
         "types": {
-          "t_contract(IDividendTracker)7392": {
+          "t_contract(IDividendTracker)8305": {
             "label": "contract IDividendTracker"
           },
           "t_uint256": {
@@ -321,10 +336,10 @@
           "t_address_payable": {
             "label": "address payable"
           },
-          "t_mapping(t_address,t_struct(LastSell)3905_storage)": {
+          "t_mapping(t_address,t_struct(LastSell)3963_storage)": {
             "label": "mapping(address => struct MetaBots.LastSell)"
           },
-          "t_struct(LastSell)3905_storage": {
+          "t_struct(LastSell)3963_storage": {
             "label": "struct MetaBots.LastSell",
             "members": [
               {
@@ -337,13 +352,13 @@
               }
             ]
           },
-          "t_contract(IDEXRouter)7211": {
+          "t_contract(IDEXRouter)8124": {
             "label": "contract IDEXRouter"
           },
-          "t_mapping(t_address,t_struct(Counter)1366_storage)": {
+          "t_mapping(t_address,t_struct(Counter)1424_storage)": {
             "label": "mapping(address => struct CountersUpgradeable.Counter)"
           },
-          "t_struct(Counter)1366_storage": {
+          "t_struct(Counter)1424_storage": {
             "label": "struct CountersUpgradeable.Counter",
             "members": [
               {
@@ -372,6 +387,171 @@
           },
           "t_array(t_uint256)49_storage": {
             "label": "uint256[49]"
+          }
+        }
+      }
+    },
+    "4a4f459d35abc5880fdbc90493efcb836b93b8b7ee4d6b203df405aaeb42ed38": {
+      "address": "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
+      "txHash": "0x75d58cb58744c334c568c6fa3b021a1b7eb2875709671a4781a1472445656e56",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:37"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:42"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:22"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:82"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "_status",
+            "type": "t_uint256",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:68"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "rewardsToken",
+            "type": "t_contract(ERC20Upgradeable)802",
+            "src": "contracts\\MetaBotsStaking.sol:19"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "stakingToken",
+            "type": "t_contract(ERC20Upgradeable)802",
+            "src": "contracts\\MetaBotsStaking.sol:20"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "startTime",
+            "type": "t_uint256",
+            "src": "contracts\\MetaBotsStaking.sol:24"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "configuredLocks",
+            "type": "t_array(t_struct(ConfiguredLock)6614_storage)dyn_storage",
+            "src": "contracts\\MetaBotsStaking.sol:30"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "allAccountStakes",
+            "type": "t_mapping(t_address,t_array(t_struct(AccountStake)6635_storage)dyn_storage)",
+            "src": "contracts\\MetaBotsStaking.sol:43"
+          }
+        ],
+        "types": {
+          "t_contract(ERC20Upgradeable)802": {
+            "label": "contract ERC20Upgradeable"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_struct(ConfiguredLock)6614_storage)dyn_storage": {
+            "label": "struct MetaBotsStaking.ConfiguredLock[]"
+          },
+          "t_struct(ConfiguredLock)6614_storage": {
+            "label": "struct MetaBotsStaking.ConfiguredLock",
+            "members": [
+              {
+                "label": "time",
+                "type": "t_uint64"
+              },
+              {
+                "label": "apy",
+                "type": "t_uint32"
+              }
+            ]
+          },
+          "t_uint64": {
+            "label": "uint64"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_mapping(t_address,t_array(t_struct(AccountStake)6635_storage)dyn_storage)": {
+            "label": "mapping(address => struct MetaBotsStaking.AccountStake[])"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_struct(AccountStake)6635_storage)dyn_storage": {
+            "label": "struct MetaBotsStaking.AccountStake[]"
+          },
+          "t_struct(AccountStake)6635_storage": {
+            "label": "struct MetaBotsStaking.AccountStake",
+            "members": [
+              {
+                "label": "active",
+                "type": "t_bool"
+              },
+              {
+                "label": "apy",
+                "type": "t_uint32"
+              },
+              {
+                "label": "started",
+                "type": "t_uint64"
+              },
+              {
+                "label": "unlock",
+                "type": "t_uint64"
+              },
+              {
+                "label": "lastUpdated",
+                "type": "t_uint64"
+              },
+              {
+                "label": "stake",
+                "type": "t_uint256"
+              },
+              {
+                "label": "currentRewards",
+                "type": "t_uint256"
+              },
+              {
+                "label": "withdrawnRewards",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
           }
         }
       }

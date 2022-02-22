@@ -39,6 +39,11 @@
       "address": "0x09861d8c3C1350699f8522253E5485f751D6fA78",
       "txHash": "0x64daadb8a6bc5be405fe24cc0c415ad1a3de1bd96c33437e9dd992a72621535b",
       "kind": "transparent"
+    },
+    {
+      "address": "0x433FF4d2aB2a37130eA0DCC54F827E1BfdD54be4",
+      "txHash": "0xc68d56969a6cc02544c2db87bad92ca7f1d38f10d366de5e08ca63ee0dbfb0c3",
+      "kind": "transparent"
     }
   ],
   "impls": {
@@ -364,6 +369,171 @@
           },
           "t_array(t_uint256)49_storage": {
             "label": "uint256[49]"
+          }
+        }
+      }
+    },
+    "4a4f459d35abc5880fdbc90493efcb836b93b8b7ee4d6b203df405aaeb42ed38": {
+      "address": "0xF7e4e38ff8cd6C0eCc508543bfe677912DB28f54",
+      "txHash": "0xae0253814445b83f560e24672c2ac9b03e8582ae5cc0a11554ad68c293ea882c",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:37"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:42"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:22"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:82"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "_status",
+            "type": "t_uint256",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:38"
+          },
+          {
+            "contract": "ReentrancyGuardUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\security\\ReentrancyGuardUpgradeable.sol:68"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "rewardsToken",
+            "type": "t_contract(ERC20Upgradeable)802",
+            "src": "contracts\\MetaBotsStaking.sol:19"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "stakingToken",
+            "type": "t_contract(ERC20Upgradeable)802",
+            "src": "contracts\\MetaBotsStaking.sol:20"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "startTime",
+            "type": "t_uint256",
+            "src": "contracts\\MetaBotsStaking.sol:24"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "configuredLocks",
+            "type": "t_array(t_struct(ConfiguredLock)6614_storage)dyn_storage",
+            "src": "contracts\\MetaBotsStaking.sol:30"
+          },
+          {
+            "contract": "MetaBotsStaking",
+            "label": "allAccountStakes",
+            "type": "t_mapping(t_address,t_array(t_struct(AccountStake)6635_storage)dyn_storage)",
+            "src": "contracts\\MetaBotsStaking.sol:43"
+          }
+        ],
+        "types": {
+          "t_contract(ERC20Upgradeable)802": {
+            "label": "contract ERC20Upgradeable"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_struct(ConfiguredLock)6614_storage)dyn_storage": {
+            "label": "struct MetaBotsStaking.ConfiguredLock[]"
+          },
+          "t_struct(ConfiguredLock)6614_storage": {
+            "label": "struct MetaBotsStaking.ConfiguredLock",
+            "members": [
+              {
+                "label": "time",
+                "type": "t_uint64"
+              },
+              {
+                "label": "apy",
+                "type": "t_uint32"
+              }
+            ]
+          },
+          "t_uint64": {
+            "label": "uint64"
+          },
+          "t_uint32": {
+            "label": "uint32"
+          },
+          "t_mapping(t_address,t_array(t_struct(AccountStake)6635_storage)dyn_storage)": {
+            "label": "mapping(address => struct MetaBotsStaking.AccountStake[])"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_struct(AccountStake)6635_storage)dyn_storage": {
+            "label": "struct MetaBotsStaking.AccountStake[]"
+          },
+          "t_struct(AccountStake)6635_storage": {
+            "label": "struct MetaBotsStaking.AccountStake",
+            "members": [
+              {
+                "label": "active",
+                "type": "t_bool"
+              },
+              {
+                "label": "apy",
+                "type": "t_uint32"
+              },
+              {
+                "label": "started",
+                "type": "t_uint64"
+              },
+              {
+                "label": "unlock",
+                "type": "t_uint64"
+              },
+              {
+                "label": "lastUpdated",
+                "type": "t_uint64"
+              },
+              {
+                "label": "stake",
+                "type": "t_uint256"
+              },
+              {
+                "label": "currentRewards",
+                "type": "t_uint256"
+              },
+              {
+                "label": "withdrawnRewards",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
           }
         }
       }

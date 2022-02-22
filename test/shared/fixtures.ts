@@ -3,15 +3,17 @@ import { waffle, ethers, upgrades } from 'hardhat'
 
 import { expandTo18Decimals } from './utilities'
 
-import { MetaBots, MetaBotsDividendTracker, WBNB, FakePSI, PancakeFactory, PancakeRouter, IPancakePair }  from '../../typechain';
+import { MetaBots, MetaBotsDividendTracker, MetaBotsStaking, WBNB, FakePSI, PancakeFactory, PancakeRouter, IPancakePair }  from '../../typechain';
 
 import MetaBotsAbi from '../../artifacts/contracts/MetaBots.sol/MetaBots.json'
 import MetaBotsDividendTrackerAbi from '../../artifacts/contracts/MetaBotsDividendTracker.sol/MetaBotsDividendTracker.json'
+import MetaBotsStakingAbi from '../../artifacts/contracts/MetaBotsStaking.sol/MetaBotsStaking.json'
 import WBNBAbi from '../../artifacts/contracts/test/WBNB.sol/WBNB.json'
 import FakePSIAbi from '../../artifacts/contracts/test/FakePSI.sol/FakePSI.json'
 import PancakeFactoryAbi from '../../artifacts/contracts/test/PancakeFactory.sol/PancakeFactory.json'
 import PancakeRouterAbi from '../../artifacts/contracts/test/PancakeRouter.sol/PancakeRouter.json'
 import IPancakePairAbi from '../../artifacts/contracts/test/PancakeRouter.sol/IPancakePair.json'
+import { now } from 'lodash';
 
 const overrides = {
   gasLimit: 9500000
@@ -25,6 +27,7 @@ interface V2Fixture {
   metaBots: MetaBots
   dividendTracker: MetaBotsDividendTracker
   pair: IPancakePair
+  staking: MetaBotsStaking
 }
 
 export async function v2Fixture([wallet, marketing, team, buyback]: Wallet[], provider: providers.Web3Provider): Promise<V2Fixture> {
@@ -56,6 +59,15 @@ export async function v2Fixture([wallet, marketing, team, buyback]: Wallet[], pr
   const pairAddress = await factory.getPair(metaBots.address, WBNB.address)
   const pair = new Contract(pairAddress, IPancakePairAbi.abi, provider) as IPancakePair;
 
+  // staking
+  const MetaBotsStaking = await ethers.getContractFactory("MetaBotsStaking");
+  const staking = await upgrades.deployProxy(MetaBotsStaking, [
+    metaBots.address,
+    metaBots.address,
+    now() + 100000,
+  ], {initializer: 'initialize'}) as MetaBotsStaking;
+  await (await metaBots.excludeFromFeesAndDividends(staking.address)).wait()
+
   return {
     WBNB,
     PSI,
@@ -64,5 +76,6 @@ export async function v2Fixture([wallet, marketing, team, buyback]: Wallet[], pr
     metaBots,
     dividendTracker,
     pair,
+    staking,
   }
 }
