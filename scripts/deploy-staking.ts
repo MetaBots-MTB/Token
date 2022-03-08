@@ -21,13 +21,14 @@ const main = async() => {
 
   // staking
   // let staking = new ethers.Contract("0x433FF4d2aB2a37130eA0DCC54F827E1BfdD54be4", MetaBotsStakingAbi.abi, signer) as MetaBotsStaking; // bsc test
-  const MetaBotsStaking = await ethers.getContractFactory("MetaBotsStaking");
+  let staking = new ethers.Contract("0x52c5b4d0c6296d3c7ab81662c54140509d8694b6", MetaBotsStakingAbi.abi, signer) as MetaBotsStaking; // bsc main
+  // const MetaBotsStaking = await ethers.getContractFactory("MetaBotsStaking");
   // staking = await upgrades.upgradeProxy(staking.address, MetaBotsStaking) as MetaBotsStaking
-  const staking = await upgrades.deployProxy(MetaBotsStaking, [
-    metaBots.address,
-    metaBots.address,
-    now()
-  ], {initializer: 'initialize'}) as MetaBotsStaking;
+  // const staking = await upgrades.deployProxy(MetaBotsStaking, [
+  //   metaBots.address,
+  //   metaBots.address,
+  //   1646730000
+  // ], {initializer: 'initialize'}) as MetaBotsStaking;
   await (await metaBots.excludeFromFeesAndDividends(staking.address)).wait()
   console.log("MetaBotsStaking deployed:", staking.address);
 

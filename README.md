@@ -7,6 +7,7 @@ This project is using [Hardhat](https://hardhat.org/getting-started/) for develo
 * Binance Chain
   * MetaBots : [0x09861d8c3c1350699f8522253e5485f751d6fa78](https://bscscan.com/address/0x09861d8c3c1350699f8522253e5485f751d6fa78)
   * MetaBotsDividendTracker : [0xA26A367D25dCD20661c8767B5933B7832A0f9909](https://bscscan.com/address/0xA26A367D25dCD20661c8767B5933B7832A0f9909)
+  * MetaBotsStaking : [0x52c5b4d0c6296d3c7ab81662c54140509d8694b6](https://bscscan.com/address/0x52c5b4d0c6296d3c7ab81662c54140509d8694b6)
 
 * Binance Test Chain
   * MetaBots : [0x09861d8c3c1350699f8522253e5485f751d6fa78](https://testnet.bscscan.com/address/0x09861d8c3c1350699f8522253e5485f751d6fa78)
