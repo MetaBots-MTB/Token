@@ -8,12 +8,17 @@ import "hardhat-tracer";
 import "hardhat-dependency-compiler";
 import 'hardhat-contract-sizer';
 import '@openzeppelin/hardhat-upgrades';
+import '@openzeppelin/hardhat-defender';
 import "@nomiclabs/hardhat-etherscan";
 
 require("dotenv").config({path: `${__dirname}/.env`});
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
+  defender: {
+    apiKey: process.env.DEFENDER_TEAM_API_KEY,
+    apiSecret: process.env.DEFENDER_TEAM_API_SECRET_KEY,
+  },
   networks: {
     hardhat: {
       // forking: {

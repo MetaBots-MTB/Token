@@ -24,6 +24,7 @@
   "dependencies": {
     "@openzeppelin/contracts": "4.4.0",
     "@openzeppelin/contracts-upgradeable": "4.4.0",
+    "@openzeppelin/hardhat-defender": "^1.6.0",
     "@passive-income/wyvern-v3": "^3.1.6",
     "@types/lodash": "^4.14.175",
     "dotenv": "^8.2.0",

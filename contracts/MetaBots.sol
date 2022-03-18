@@ -304,7 +304,7 @@ contract MetaBots is
         require(balanceOf(sender) >= amount, "ERC20: transfer amount exceeds balance");
         if(((automatedMarketMakerPairs[recipient] && balanceOf(recipient) != 0) ||
             automatedMarketMakerPairs[sender]) && 
-            sender != liquidityAddress) {
+            sender != liquidityAddress && recipient != liquidityAddress) {
             require(!tradingPaused, "TRADING_PAUSED");
         }
         checkSellLimit(sender, recipient, amount);
